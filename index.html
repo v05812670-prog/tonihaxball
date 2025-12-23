@@ -34,7 +34,7 @@ body {
 }
 
 /* Inicio */
-.home {
+.home, .activate-screen {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -89,6 +89,12 @@ body {
 </head>
 <body>
 
+<!-- Pantalla de activación -->
+<div class="activate-screen" id="activateScreen">
+  <div class="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
+  <button class="btn" id="activateBtn">Toca para activar música y sonido</button>
+</div>
+
 <!-- Audios -->
 <audio id="background-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 <audio id="coin-sound" src="https://freesound.org/data/previews/341/341695_6246400-lq.mp3"></audio>
@@ -103,21 +109,22 @@ function playCoin() { coin.currentTime = 0; coin.play(); }
 function playClick() { clickSound.currentTime = 0; clickSound.play(); }
 function playEffects() { playCoin(); playClick(); }
 
-// Forzar reproducción de música al cargar (funciona en la mayoría de navegadores modernos)
-window.addEventListener('load', () => {
+// Activar música al tocar el botón inicial (garantiza que funcione en WhatsApp)
+document.getElementById("activateBtn").addEventListener("click", () => {
   music.volume = 0.2;
-  music.play().catch(()=>{ 
-    // Si falla, reproducir al primer click
-    document.body.addEventListener('click', () => { music.play(); }, {once:true});
-  });
+  music.play().catch(()=>console.log("Audio bloqueado"));
+  document.getElementById("activateScreen").style.display = "none";
+  openMenu();
+  playEffects();
 });
-</script>
 
-<!-- INICIO -->
-<div class="home" id="home">
-  <div class="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
-  <button class="btn" onclick="openMenu(); playEffects();">ENTRAR</button>
-</div>
+// Funciones de navegación
+function openMenu() { menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
+function showInfo() { menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); }
+function showVentas() { menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); }
+function showRedes() { menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); }
+function backMenu() { info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
+</script>
 
 <!-- MENÚ -->
 <div class="menu" id="menu">
@@ -165,14 +172,6 @@ window.addEventListener('load', () => {
     <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
   </div>
 </div>
-
-<script>
-function openMenu() { home.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
-function showInfo() { menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); }
-function showVentas() { menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); }
-function showRedes() { menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); }
-function backMenu() { info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
-</script>
 
 </body>
 </html>
