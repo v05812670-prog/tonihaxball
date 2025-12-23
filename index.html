@@ -141,11 +141,18 @@
 
 <body>
 
-  <!-- MUSICA DE FONDO ONLINE -->
+  <!-- MUSICA DE FONDO TRANQUILA -->
   <audio id="background-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
+
+  <!-- SONIDO DE MONEDA -->
+  <audio id="coin-sound" src="https://cdn.freesound.org/previews/341/341695_6246400-lq.mp3"></audio>
+
   <script>
     const music = document.getElementById("background-music");
     music.volume = 0.2;
+
+    const coin = document.getElementById("coin-sound");
+    function playCoin() { coin.currentTime = 0; coin.play(); }
   </script>
 
   <!-- INICIO -->
@@ -180,7 +187,9 @@
     <div class="box">
       <h2>Ventas</h2>
       <p>Este link es de mi servidor de Discord oficial de ventas.</p>
-      <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">Discord de Ventas</a>
+      <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">Discord
+      </a>
       <div class="back" onclick="backMenu()">Volver al menú</div>
     </div>
   </div>
@@ -201,30 +210,35 @@
 
   <script>
     function openMenu() {
+      playCoin();
       home.style.display = "none";
       menu.style.display = "block";
       menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate");
     }
 
     function showInfo() {
+      playCoin();
       menu.style.display = "none";
       info.style.display = "block";
       info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate");
     }
 
     function showVentas() {
+      playCoin();
       menu.style.display = "none";
       ventas.style.display = "block";
       ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate");
     }
 
     function showRedes() {
+      playCoin();
       menu.style.display = "none";
       redes.style.display = "block";
       redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate");
     }
 
     function backMenu() {
+      playCoin();
       info.style.display = "none";
       ventas.style.display = "none";
       redes.style.display = "none";
