@@ -16,12 +16,19 @@ body {
   overflow-x: hidden;
 }
 
-/* Animación */
+/* Animación de slide-in para secciones */
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(120px); }
   to { opacity: 1; transform: translateX(0); }
 }
 .animate { animation: slideIn 0.6s ease forwards; }
+
+/* Animación de aparición + acercamiento para el título */
+@keyframes appearZoom {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.appearZoom { animation: appearZoom 1s ease forwards; }
 
 /* Hover neon general */
 .btn, .card, .link-box, .back {
@@ -33,7 +40,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Inicio */
+/* Pantalla de inicio y activación */
 .home, .activate-screen {
   height: 100vh;
   display: flex;
@@ -91,7 +98,7 @@ body {
 
 <!-- Pantalla de activación -->
 <div class="activate-screen" id="activateScreen">
-  <div class="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
+  <div class="title appearZoom">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
   <button class="btn" id="activateBtn">Toca para activar música y sonido</button>
 </div>
 
@@ -109,7 +116,7 @@ function playCoin() { coin.currentTime = 0; coin.play(); }
 function playClick() { clickSound.currentTime = 0; clickSound.play(); }
 function playEffects() { playCoin(); playClick(); }
 
-// Activar música al tocar el botón inicial (garantiza que funcione en WhatsApp)
+// Activar música al tocar el botón inicial
 document.getElementById("activateBtn").addEventListener("click", () => {
   music.volume = 0.2;
   music.play().catch(()=>console.log("Audio bloqueado"));
@@ -120,19 +127,19 @@ document.getElementById("activateBtn").addEventListener("click", () => {
 
 // Funciones de navegación
 function openMenu() { menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
-function showInfo() { menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); }
-function showVentas() { menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); }
-function showRedes() { menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); }
-function backMenu() { info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
+function showInfo() { menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); playEffects(); }
+function showVentas() { menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); playEffects(); }
+function showRedes() { menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); playEffects(); }
+function backMenu() { info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); playEffects(); }
 </script>
 
 <!-- MENÚ -->
 <div class="menu" id="menu">
   <h2>MENÚ</h2>
   <div class="sections">
-    <div class="card" onclick="showInfo(); playEffects();">Información</div>
-    <div class="card" onclick="showVentas(); playEffects();">Ventas</div>
-    <div class="card" onclick="showRedes(); playEffects();">Redes</div>
+    <div class="card" onclick="showInfo();">Información</div>
+    <div class="card" onclick="showVentas();">Ventas</div>
+    <div class="card" onclick="showRedes();">Redes</div>
   </div>
 </div>
 
@@ -143,7 +150,7 @@ function backMenu() { info.style.display="none"; ventas.style.display="none"; re
     <p>
       Hola, soy tonihaxball, streamer de YouTube y TikTok. Actualmente vendo brainrots, un juego digital de Roblox que tiene un gran mercado. Hago directos todos los días y mi meta son los 100k de suscriptores. Sé de tecnología, vendo cuentas de videojuegos, sé diseño básico, edito videos y fotos, y mucho más.
     </p>
-    <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
+    <div class="back" onclick="backMenu();">Volver al menú</div>
   </div>
 </div>
 
@@ -155,7 +162,7 @@ function backMenu() { info.style.display="none"; ventas.style.display="none"; re
     <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">Discord
     </a>
-    <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
+    <div class="back" onclick="backMenu();">Volver al menú</div>
   </div>
 </div>
 
@@ -169,9 +176,7 @@ function backMenu() { info.style.display="none"; ventas.style.display="none"; re
     <a class="link-box" href="https://www.youtube.com/@TONIHAXBALL" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">YouTube
     </a>
-    <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
+    <div class="back" onclick="backMenu();">Volver al menú</div>
   </div>
 </div>
 
-</body>
-</html>
