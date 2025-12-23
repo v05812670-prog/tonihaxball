@@ -1,171 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TONIHAXBALL</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TONIHAXBALL</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #0f2027, #203a43, #000);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at top, #0f2027, #203a43, #000);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+/* Animación */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(120px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate { animation: slideIn 0.6s ease forwards; }
 
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(120px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .animate { animation: slideIn 0.6s ease forwards; }
+/* Hover neon general */
+.btn, .card, .link-box, .back {
+  transition: all 0.2s ease-in-out;
+}
+.btn:hover, .card:hover, .link-box:hover, .back:hover {
+  box-shadow: 0 0 10px #00f0ff,0 0 20px #00f0ff,0 0 30px #00f0ff;
+  text-shadow: 0 0 10px #00f0ff;
+  transform: scale(1.05);
+}
 
-    /* HOVER NEON */
-    .btn, .card, .link-box, .back {
-      transition: all 0.2s ease-in-out;
-    }
-    .btn:hover, .card:hover, .link-box:hover, .back:hover {
-      box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
-      text-shadow: 0 0 10px #00f0ff;
-      transform: scale(1.05);
-    }
+/* Inicio */
+.home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+                    url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1");
+  background-size: cover;
+  background-position: center;
+}
+.title {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  text-shadow: 0 0 20px #00f0ff;
+}
+@media (max-width: 600px) { .title { font-size: 2.5rem; } }
 
-    .home {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background-image:
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
-        url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1");
-      background-size: cover;
-      background-position: center;
-    }
+.btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #00f0ff, #0066ff);
+  color: black;
+  font-weight: bold;
+}
 
-    .title {
-      font-size: 4rem;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 40px;
-      text-shadow: 0 0 20px #00f0ff;
-    }
-    @media (max-width: 600px) { .title { font-size: 2.5rem; } }
+/* Menú */
+.menu { display: none; padding: 60px 20px; max-width: 900px; margin: auto; }
+.menu h2 { text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
+.sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.card {
+  background: rgba(0,0,0,0.6); border: 2px solid #00f0ff; border-radius: 20px;
+  padding: 25px; cursor: pointer; text-align: center; font-size: 1.2rem;
+}
 
-    .btn {
-      padding: 15px 40px;
-      font-size: 1.2rem;
-      border-radius: 25px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(90deg, #00f0ff, #0066ff);
-      color: black;
-      font-weight: bold;
-    }
-
-    .menu { display: none; padding: 60px 20px; max-width: 900px; margin: auto; }
-    .menu h2 { text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
-    .sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .card {
-      background: rgba(0,0,0,0.6); border: 2px solid #00f0ff; border-radius: 20px;
-      padding: 25px; cursor: pointer; text-align: center; font-size: 1.2rem;
-    }
-
-    .content { display: none; padding: 40px 20px; max-width: 900px; margin: auto; }
-    .box { background: rgba(0,0,0,0.7); border-radius: 20px; padding: 30px; border: 2px solid #00f0ff; }
-    .link-box {
-      display: inline-block; margin-top: 20px; padding: 15px 25px;
-      background: linear-gradient(90deg, #00f0ff, #0066ff); border-radius: 20px;
-      color: black; font-weight: bold; text-decoration: none; margin-right: 10px;
-    }
-    .link-box img { width: 20px; vertical-align: middle; margin-right: 5px; }
-    .back { margin-top: 30px; display: inline-block; cursor: pointer; color: #00f0ff; text-decoration: underline; }
-  </style>
+/* Contenido */
+.content { display: none; padding: 40px 20px; max-width: 900px; margin: auto; }
+.box { background: rgba(0,0,0,0.7); border-radius: 20px; padding: 30px; border: 2px solid #00f0ff; }
+.link-box {
+  display: inline-block; margin-top: 20px; padding: 15px 25px;
+  background: linear-gradient(90deg, #00f0ff, #0066ff); border-radius: 20px;
+  color: black; font-weight: bold; text-decoration: none; margin-right: 10px;
+}
+.link-box img { width: 20px; vertical-align: middle; margin-right: 5px; }
+.back { margin-top: 30px; display: inline-block; cursor: pointer; color: #00f0ff; text-decoration: underline; }
+</style>
 </head>
 <body>
 
-  <!-- AUDIO -->
-  <audio id="background-music" autoplay loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-  <audio id="coin-sound" src="https://freesound.org/data/previews/341/341695_6246400-lq.mp3"></audio>
-  <audio id="click-sound" src="https://freesound.org/data/previews/146/146726_1823128-lq.mp3"></audio>
+<!-- Audios -->
+<audio id="background-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+<audio id="coin-sound" src="https://freesound.org/data/previews/341/341695_6246400-lq.mp3"></audio>
+<audio id="click-sound" src="https://freesound.org/data/previews/146/146726_1823128-lq.mp3"></audio>
 
-  <script>
-    const music = document.getElementById("background-music");
-    music.volume = 0.2;
+<script>
+const music = document.getElementById("background-music");
+const coin = document.getElementById("coin-sound");
+const clickSound = document.getElementById("click-sound");
 
-    const coin = document.getElementById("coin-sound");
-    const clickSound = document.getElementById("click-sound");
+function playCoin() { coin.currentTime = 0; coin.play(); }
+function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+function playEffects() { playCoin(); playClick(); }
 
-    function playCoin() { coin.currentTime = 0; coin.play(); }
-    function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+// Forzar reproducción de música al cargar (funciona en la mayoría de navegadores modernos)
+window.addEventListener('load', () => {
+  music.volume = 0.2;
+  music.play().catch(()=>{ 
+    // Si falla, reproducir al primer click
+    document.body.addEventListener('click', () => { music.play(); }, {once:true});
+  });
+});
+</script>
 
-    function playEffects() { playCoin(); playClick(); }
-  </script>
+<!-- INICIO -->
+<div class="home" id="home">
+  <div class="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
+  <button class="btn" onclick="openMenu(); playEffects();">ENTRAR</button>
+</div>
 
-  <!-- INICIO -->
-  <div class="home" id="home">
-    <div class="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
-    <button class="btn" onclick="openMenu(); playEffects();">ENTRAR</button>
+<!-- MENÚ -->
+<div class="menu" id="menu">
+  <h2>MENÚ</h2>
+  <div class="sections">
+    <div class="card" onclick="showInfo(); playEffects();">Información</div>
+    <div class="card" onclick="showVentas(); playEffects();">Ventas</div>
+    <div class="card" onclick="showRedes(); playEffects();">Redes</div>
   </div>
+</div>
 
-  <!-- MENÚ -->
-  <div class="menu" id="menu">
-    <h2>MENÚ</h2>
-    <div class="sections">
-      <div class="card" onclick="showInfo(); playEffects();">Información</div>
-      <div class="card" onclick="showVentas(); playEffects();">Ventas</div>
-      <div class="card" onclick="showRedes(); playEffects();">Redes</div>
-    </div>
+<!-- INFORMACIÓN -->
+<div class="content" id="info">
+  <div class="box">
+    <h2>Información</h2>
+    <p>
+      Hola, soy tonihaxball, streamer de YouTube y TikTok. Actualmente vendo brainrots, un juego digital de Roblox que tiene un gran mercado. Hago directos todos los días y mi meta son los 100k de suscriptores. Sé de tecnología, vendo cuentas de videojuegos, sé diseño básico, edito videos y fotos, y mucho más.
+    </p>
+    <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
   </div>
+</div>
 
-  <!-- INFORMACIÓN -->
-  <div class="content" id="info">
-    <div class="box">
-      <h2>Información</h2>
-      <p>
-        Hola, soy tonihaxball, streamer de YouTube y TikTok. Actualmente vendo brainrots, un juego digital de Roblox que tiene un gran mercado. Hago directos todos los días y mi meta son los 100k de suscriptores. Sé de tecnología, vendo cuentas de videojuegos, sé diseño básico, edito videos y fotos, y mucho más.
-      </p>
-      <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
-    </div>
+<!-- VENTAS -->
+<div class="content" id="ventas">
+  <div class="box">
+    <h2>Ventas</h2>
+    <p>Este link es de mi servidor de Discord oficial de ventas.</p>
+    <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">Discord
+    </a>
+    <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
   </div>
+</div>
 
-  <!-- VENTAS -->
-  <div class="content" id="ventas">
-    <div class="box">
-      <h2>Ventas</h2>
-      <p>Este link es de mi servidor de Discord oficial de ventas.</p>
-      <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">Discord
-      </a>
-      <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
-    </div>
+<!-- REDES -->
+<div class="content" id="redes">
+  <div class="box">
+    <h2>Redes</h2>
+    <a class="link-box" href="https://www.tiktok.com/@ketupakcito_store?lang=es" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046123.png" alt="TikTok">TikTok
+    </a>
+    <a class="link-box" href="https://www.youtube.com/@TONIHAXBALL" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">YouTube
+    </a>
+    <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
   </div>
+</div>
 
-  <!-- REDES -->
-  <div class="content" id="redes">
-    <div class="box">
-      <h2>Redes</h2>
-      <a class="link-box" href="https://www.tiktok.com/@ketupakcito_store?lang=es" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046123.png" alt="TikTok">TikTok
-      </a>
-      <a class="link-box" href="https://www.youtube.com/@TONIHAXBALL" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">YouTube
-      </a>
-      <div class="back" onclick="backMenu(); playEffects();">Volver al menú</div>
-    </div>
-  </div>
-
-  <script>
-    function openMenu() { home.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
-    function showInfo() { menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); }
-    function showVentas() { menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); }
-    function showRedes() { menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); }
-    function backMenu() { info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
-  </script>
+<script>
+function openMenu() { home.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
+function showInfo() { menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); }
+function showVentas() { menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); }
+function showRedes() { menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); }
+function backMenu() { info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); }
+</script>
 
 </body>
 </html>
