@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TONIHAXBALL</title>
 
 <style>
-* { box-sizing: border-box; }
 body { margin:0; font-family: Arial, sans-serif; background: radial-gradient(circle at top, #0f2027, #203a43, #000); color:white; min-height:100vh; overflow-x:hidden; }
 
 /* Animaciones */
@@ -18,11 +17,11 @@ body { margin:0; font-family: Arial, sans-serif; background: radial-gradient(cir
 
 /* Hover neón */
 .btn, .card, .link-box, .back { transition: all 0.2s ease-in-out; }
-.btn:hover, .card:hover, .link-box:hover, .back:hover { box-shadow: 0 0 10px #00f0ff,0 0 20px #00f0ff,0 0 30px #00f0ff; text-shadow:0 0 10px #00f0ff; transform: scale(1.05); }
+.btn:hover, .card:hover, .link-box:hover, .back:hover { box-shadow:0 0 10px #00f0ff,0 0 20px #00f0ff,0 0 30px #00f0ff; text-shadow:0 0 10px #00f0ff; transform: scale(1.05); }
 
 /* Pantalla inicial */
 .activate-screen { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1"); background-size:cover; background-position:center; }
-.title { font-size:4rem; font-weight:900; letter-spacing:4px; margin-bottom:40px; text-shadow:0 0 20px #00f0ff; }
+.title { font-size:4rem; font-weight:900; letter-spacing:4px; margin-bottom:40px; text-shadow:0 0 20px #00f0ff; opacity:0; }
 @media (max-width:600px){.title{font-size:2.5rem;}}
 .btn { padding:15px 40px; font-size:1.2rem; border-radius:25px; border:none; cursor:pointer; background:linear-gradient(90deg,#00f0ff,#0066ff); color:black; font-weight:bold; }
 
@@ -42,9 +41,8 @@ body { margin:0; font-family: Arial, sans-serif; background: radial-gradient(cir
 </head>
 <body>
 
-<!-- Pantalla de activación -->
 <div class="activate-screen" id="activateScreen">
-  <div class="title appearZoom" id="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
+  <div class="title" id="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
   <button class="btn" id="activateBtn">Toca para activar música y sonido</button>
 </div>
 
@@ -54,18 +52,26 @@ body { margin:0; font-family: Arial, sans-serif; background: radial-gradient(cir
 <audio id="click-sound" src="https://freesound.org/data/previews/146/146726_1823128-lq.mp3"></audio>
 
 <script>
-const music=document.getElementById("background-music");
-const coin=document.getElementById("coin-sound");
-const clickSound=document.getElementById("click-sound");
+const music = document.getElementById("background-music");
+const coin = document.getElementById("coin-sound");
+const clickSound = document.getElementById("click-sound");
 
-function playCoin(){ coin.currentTime=0; coin.play(); }
-function playClick(){ clickSound.currentTime=0; clickSound.play(); }
+function playCoin(){ coin.currentTime=0; coin.play().catch(()=>{}); }
+function playClick(){ clickSound.currentTime=0; clickSound.play().catch(()=>{}); }
 function playEffects(){ playCoin(); playClick(); }
 
-// Activar música y efectos
+// Animación de título y activación de música
 document.getElementById("activateBtn").addEventListener("click", ()=>{
+  // Mostrar animación título
+  const title = document.getElementById("title");
+  title.style.opacity="1";
+  title.classList.add("appearZoom");
+
+  // Reproducir música
   music.volume=0.2;
-  music.play().catch(()=>console.log("Audio bloqueado"));
+  music.play().catch(()=>{console.log("Audio bloqueado")});
+
+  // Ocultar pantalla inicial y mostrar menú
   document.getElementById("activateScreen").style.display="none";
   openMenu();
   playEffects();
