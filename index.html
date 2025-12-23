@@ -22,7 +22,6 @@
       from { opacity: 0; transform: translateX(120px); }
       to { opacity: 1; transform: translateX(0); }
     }
-
     .animate { animation: slideIn 0.6s ease forwards; }
 
     /* PANTALLA INICIO */
@@ -48,7 +47,7 @@
       text-shadow: 0 0 20px #00f0ff;
     }
 
-    /* Ajuste para móviles */
+    /* Tamaño adaptativo para celular */
     @media (max-width: 600px) {
       .title { font-size: 2.5rem; }
     }
@@ -64,7 +63,6 @@
       font-weight: bold;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
     .btn:hover {
       transform: scale(1.05);
       box-shadow: 0 0 20px #00f0ff;
@@ -77,19 +75,16 @@
       max-width: 900px;
       margin: auto;
     }
-
     .menu h2 {
       text-align: center;
       font-size: 2.5rem;
       margin-bottom: 30px;
     }
-
     .sections {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
-
     .card {
       background: rgba(0,0,0,0.6);
       border: 2px solid #00f0ff;
@@ -100,7 +95,6 @@
       font-size: 1.2rem;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 20px #00f0ff;
@@ -113,14 +107,12 @@
       max-width: 900px;
       margin: auto;
     }
-
     .box {
       background: rgba(0,0,0,0.7);
       border-radius: 20px;
       padding: 30px;
       border: 2px solid #00f0ff;
     }
-
     .link-box {
       display: inline-block;
       margin-top: 20px;
@@ -132,13 +124,11 @@
       text-decoration: none;
       margin-right: 10px;
     }
-
     .link-box img {
       width: 20px;
       vertical-align: middle;
       margin-right: 5px;
     }
-
     .back {
       margin-top: 30px;
       display: inline-block;
@@ -151,8 +141,8 @@
 
 <body>
 
-  <!-- MUSICA DE FONDO -->
-  <audio id="background-music" src="musica.mp3" autoplay loop></audio>
+  <!-- MUSICA DE FONDO ONLINE -->
+  <audio id="background-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
   <script>
     const music = document.getElementById("background-music");
     music.volume = 0.2;
@@ -200,10 +190,10 @@
     <div class="box">
       <h2>Redes</h2>
       <a class="link-box" href="https://www.tiktok.com/@ketupakcito_store?lang=es" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok">TikTok
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046123.png" alt="TikTok">TikTok
       </a>
       <a class="link-box" href="https://www.youtube.com/@TONIHAXBALL" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">YouTube
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">YouTube
       </a>
       <div class="back" onclick="backMenu()">Volver al menú</div>
     </div>
@@ -245,4 +235,3 @@
 
 </body>
 </html>
-
