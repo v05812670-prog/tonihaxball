@@ -6,9 +6,7 @@
   <title>TONIHAXBALL</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -19,21 +17,13 @@
       overflow-x: hidden;
     }
 
-    /* ANIMACIÓN DESLIZAMIENTO */
+    /* ANIMACIONES */
     @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(120px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(120px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    .animate {
-      animation: slideIn 0.6s ease forwards;
-    }
+    .animate { animation: slideIn 0.6s ease forwards; }
 
     /* PANTALLA INICIO */
     .home {
@@ -56,6 +46,11 @@
       letter-spacing: 4px;
       margin-bottom: 40px;
       text-shadow: 0 0 20px #00f0ff;
+    }
+
+    /* Ajuste para móviles */
+    @media (max-width: 600px) {
+      .title { font-size: 2.5rem; }
     }
 
     .btn {
@@ -135,6 +130,13 @@
       color: black;
       font-weight: bold;
       text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .link-box img {
+      width: 20px;
+      vertical-align: middle;
+      margin-right: 5px;
     }
 
     .back {
@@ -149,9 +151,16 @@
 
 <body>
 
+  <!-- MUSICA DE FONDO -->
+  <audio id="background-music" src="musica.mp3" autoplay loop></audio>
+  <script>
+    const music = document.getElementById("background-music");
+    music.volume = 0.2;
+  </script>
+
   <!-- INICIO -->
   <div class="home" id="home">
-    <div class="title">TONIHAXBALL</div>
+    <div class="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
     <button class="btn" onclick="openMenu()">ENTRAR</button>
   </div>
 
@@ -170,18 +179,8 @@
     <div class="box">
       <h2>Información</h2>
       <p>
-        Hola, soy tonihaxball, streamer de YouTube y TikTok.
-        Actualmente vendo brainrots, un juego digital de Roblox
-        que tiene un gran mercado. Hago directos todos los días
-        y mi meta son los 100k de suscriptores.
+        Hola, soy tonihaxball, streamer de YouTube y TikTok. Actualmente vendo brainrots, un juego digital de Roblox que tiene un gran mercado. Hago directos todos los días y mi meta son los 100k de suscriptores. Sé de tecnología, vendo cuentas de videojuegos, sé diseño básico, edito videos y fotos, y mucho más.
       </p>
-
-      <a class="link-box"
-         href="https://www.youtube.com/@TONIHAXBALL"
-         target="_blank">
-        Canal de YouTube
-      </a>
-
       <div class="back" onclick="backMenu()">Volver al menú</div>
     </div>
   </div>
@@ -190,16 +189,8 @@
   <div class="content" id="ventas">
     <div class="box">
       <h2>Ventas</h2>
-      <p>
-        Este link es de mi servidor de Discord oficial de ventas.
-      </p>
-
-      <a class="link-box"
-         href="https://discord.gg/N2Nscgvu"
-         target="_blank">
-        Discord de Ventas
-      </a>
-
+      <p>Este link es de mi servidor de Discord oficial de ventas.</p>
+      <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">Discord de Ventas</a>
       <div class="back" onclick="backMenu()">Volver al menú</div>
     </div>
   </div>
@@ -208,7 +199,12 @@
   <div class="content" id="redes">
     <div class="box">
       <h2>Redes</h2>
-      <p>Próximamente.</p>
+      <a class="link-box" href="https://www.tiktok.com/@ketupakcito_store?lang=es" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok">TikTok
+      </a>
+      <a class="link-box" href="https://www.youtube.com/@TONIHAXBALL" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">YouTube
+      </a>
       <div class="back" onclick="backMenu()">Volver al menú</div>
     </div>
   </div>
@@ -217,33 +213,25 @@
     function openMenu() {
       home.style.display = "none";
       menu.style.display = "block";
-      menu.classList.remove("animate");
-      void menu.offsetWidth;
-      menu.classList.add("animate");
+      menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate");
     }
 
     function showInfo() {
       menu.style.display = "none";
       info.style.display = "block";
-      info.classList.remove("animate");
-      void info.offsetWidth;
-      info.classList.add("animate");
+      info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate");
     }
 
     function showVentas() {
       menu.style.display = "none";
       ventas.style.display = "block";
-      ventas.classList.remove("animate");
-      void ventas.offsetWidth;
-      ventas.classList.add("animate");
+      ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate");
     }
 
     function showRedes() {
       menu.style.display = "none";
       redes.style.display = "block";
-      redes.classList.remove("animate");
-      void redes.offsetWidth;
-      redes.classList.add("animate");
+      redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate");
     }
 
     function backMenu() {
@@ -251,11 +239,10 @@
       ventas.style.display = "none";
       redes.style.display = "none";
       menu.style.display = "block";
-      menu.classList.remove("animate");
-      void menu.offsetWidth;
-      menu.classList.add("animate");
+      menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate");
     }
   </script>
 
 </body>
 </html>
+
