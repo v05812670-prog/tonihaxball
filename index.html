@@ -4,129 +4,255 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TONIHAXBALL</title>
+
 <style>
-body { margin:0; font-family: Arial, sans-serif; background: radial-gradient(circle at top, #0f2027, #203a43, #000); color:white; min-height:100vh; overflow-x:hidden; }
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #0f2027, #203a43, #000);
+  color:white;
+  overflow-x:hidden;
+}
+
 /* Animaciones */
-@keyframes slideIn { from{opacity:0; transform:translateX(120px);} to{opacity:1; transform:translateX(0);} }
-.animate { animation: slideIn 0.6s ease forwards; }
-@keyframes appearZoom { 0%{opacity:0; transform:scale(0.5);} 100%{opacity:1; transform:scale(1);} }
-.appearZoom { animation: appearZoom 1s ease forwards; }
+@keyframes zoomFade {
+  from { opacity:0; transform: scale(0.5); }
+  to { opacity:1; transform: scale(1); }
+}
+.zoomFade {
+  animation: zoomFade 1s ease forwards;
+}
+
+@keyframes slideIn {
+  from { opacity:0; transform: translateX(120px); }
+  to { opacity:1; transform: translateX(0); }
+}
+.animate {
+  animation: slideIn 0.6s ease forwards;
+}
 
 /* Hover neón */
-.btn, .card, .link-box, .back { transition: all 0.2s ease-in-out; cursor:pointer; }
-.btn:hover, .card:hover, .link-box:hover, .back:hover { box-shadow:0 0 10px #00f0ff,0 0 20px #00f0ff,0 0 30px #00f0ff; text-shadow:0 0 10px #00f0ff; transform: scale(1.05); }
+.btn, .card, .link-box, .back {
+  transition: all 0.25s ease;
+  cursor:pointer;
+}
+.btn:hover, .card:hover, .link-box:hover, .back:hover {
+  box-shadow: 0 0 12px #00f0ff, 0 0 25px #00f0ff;
+  transform: scale(1.05);
+}
 
-/* Pantalla inicial */
-.activate-screen { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1"); background-size:cover; background-position:center; }
-.title { font-size:4rem; font-weight:900; letter-spacing:4px; margin-bottom:40px; text-shadow:0 0 20px #00f0ff; opacity:0; }
-@media (max-width:600px){.title{font-size:2.5rem;}}
-.btn { padding:15px 40px; font-size:1.2rem; border-radius:25px; border:none; background:linear-gradient(90deg,#00f0ff,#0066ff); color:black; font-weight:bold; }
+/* Pantalla inicio */
+.activate-screen {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1");
+  background-size:cover;
+  background-position:center;
+}
+
+/* LOGO */
+.logo {
+  width:140px;
+  margin-bottom:20px;
+  opacity:0;
+}
+@media (max-width:600px){
+  .logo { width:100px; }
+}
+
+/* Título */
+.title {
+  font-size:4rem;
+  font-weight:900;
+  letter-spacing:4px;
+  text-shadow:0 0 20px #00f0ff;
+  opacity:0;
+}
+@media (max-width:600px){
+  .title { font-size:2.5rem; }
+}
+
+/* Botón */
+.btn {
+  margin-top:30px;
+  padding:15px 40px;
+  font-size:1.1rem;
+  border-radius:25px;
+  border:none;
+  background: linear-gradient(90deg,#00f0ff,#0066ff);
+  font-weight:bold;
+}
 
 /* Menú */
-.menu { display:none; padding:60px 20px; max-width:900px; margin:auto; }
-.menu h2 { text-align:center; font-size:2.5rem; margin-bottom:30px; }
-.sections { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:20px; }
-.card { background:rgba(0,0,0,0.6); border:2px solid #00f0ff; border-radius:20px; padding:25px; text-align:center; font-size:1.2rem; }
+.menu {
+  display:none;
+  padding:60px 20px;
+  max-width:900px;
+  margin:auto;
+}
+.sections {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card {
+  background: rgba(0,0,0,0.6);
+  border:2px solid #00f0ff;
+  border-radius:20px;
+  padding:25px;
+  text-align:center;
+}
 
 /* Contenido */
-.content { display:none; padding:40px 20px; max-width:900px; margin:auto; }
-.box { background:rgba(0,0,0,0.7); border-radius:20px; padding:30px; border:2px solid #00f0ff; }
-.link-box { display:inline-block; margin-top:20px; padding:15px 25px; background:linear-gradient(90deg,#00f0ff,#0066ff); border-radius:20px; color:black; font-weight:bold; text-decoration:none; margin-right:10px; }
-.link-box img { width:20px; vertical-align:middle; margin-right:5px; }
-.back { margin-top:30px; display:inline-block; color:#00f0ff; text-decoration:underline; }
+.content {
+  display:none;
+  padding:40px 20px;
+  max-width:900px;
+  margin:auto;
+}
+.box {
+  background: rgba(0,0,0,0.7);
+  border:2px solid #00f0ff;
+  border-radius:20px;
+  padding:30px;
+}
+.link-box {
+  display:inline-block;
+  margin-top:20px;
+  padding:15px 25px;
+  border-radius:20px;
+  background: linear-gradient(90deg,#00f0ff,#0066ff);
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+}
+.link-box img {
+  width:20px;
+  vertical-align:middle;
+  margin-right:6px;
+}
+.back {
+  margin-top:30px;
+  color:#00f0ff;
+  text-decoration:underline;
+  display:inline-block;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Pantalla inicial -->
+<!-- INICIO -->
 <div class="activate-screen" id="activateScreen">
-  <div class="title" id="title">TONIHAXBALL<span style="font-size:1rem; vertical-align:super;">®</span></div>
-  <button class="btn" id="activateBtn">TOCAR PARA MÁS INFORMACIÓN</button>
+
+  <!-- LOGO -->
+  <img src="logo.png" class="logo" id="logo">
+
+  <!-- TITULO -->
+  <div class="title" id="title">
+    TONIHAXBALL<span style="font-size:1rem;vertical-align:super;">®</span>
+  </div>
+
+  <button class="btn" id="activateBtn">
+    TOCAR PARA MÁS INFORMACIÓN
+  </button>
 </div>
 
-<!-- Audios -->
-<audio id="background-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-<audio id="coin-sound" src="https://freesound.org/data/previews/341/341695_6246400-lq.mp3"></audio>
-<audio id="click-sound" src="https://freesound.org/data/previews/146/146726_1823128-lq.mp3"></audio>
+<!-- AUDIOS -->
+<audio id="music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+<audio id="coin" src="https://freesound.org/data/previews/341/341695_6246400-lq.mp3"></audio>
+<audio id="click" src="https://freesound.org/data/previews/146/146726_1823128-lq.mp3"></audio>
 
 <script>
-const music=document.getElementById("background-music");
-const coin=document.getElementById("coin-sound");
-const clickSound=document.getElementById("click-sound");
+const music = document.getElementById("music");
+const coin = document.getElementById("coin");
+const click = document.getElementById("click");
 
-function playCoin(){ coin.currentTime=0; coin.play().catch(()=>{}); }
-function playClick(){ clickSound.currentTime=0; clickSound.play().catch(()=>{}); }
-function playEffects(){ playCoin(); playClick(); }
+function fx(){
+  coin.currentTime=0;
+  click.currentTime=0;
+  coin.play().catch(()=>{});
+  click.play().catch(()=>{});
+}
 
-// Activar música y animación
-document.getElementById("activateBtn").addEventListener("click", ()=>{
-  // Animación título
-  const title=document.getElementById("title");
-  title.style.opacity="1";
-  title.classList.add("appearZoom");
+activateBtn.onclick = () => {
+  logo.classList.add("zoomFade");
+  title.classList.add("zoomFade");
 
-  // Reproducir música
-  music.volume=0.2;
+  music.volume = 0.2;
   music.play().catch(()=>{});
 
-  // Ocultar pantalla inicial y mostrar menú
-  document.getElementById("activateScreen").style.display="none";
-  openMenu();
-  playEffects();
-});
+  activateScreen.style.display="none";
+  menu.style.display="block";
+  menu.classList.add("animate");
+  fx();
+};
 
-// Funciones de navegación con sonido
-function openMenu(){ menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); playEffects(); }
-function showInfo(){ menu.style.display="none"; info.style.display="block"; info.classList.remove("animate"); void info.offsetWidth; info.classList.add("animate"); playEffects(); }
-function showVentas(){ menu.style.display="none"; ventas.style.display="block"; ventas.classList.remove("animate"); void ventas.offsetWidth; ventas.classList.add("animate"); playEffects(); }
-function showRedes(){ menu.style.display="none"; redes.style.display="block"; redes.classList.remove("animate"); void redes.offsetWidth; redes.classList.add("animate"); playEffects(); }
-function backMenu(){ info.style.display="none"; ventas.style.display="none"; redes.style.display="none"; menu.style.display="block"; menu.classList.remove("animate"); void menu.offsetWidth; menu.classList.add("animate"); playEffects(); }
+function show(id){
+  fx();
+  menu.style.display="none";
+  document.getElementById(id).style.display="block";
+  document.getElementById(id).classList.add("animate");
+}
+function back(){
+  fx();
+  info.style.display=ventas.style.display=redes.style.display="none";
+  menu.style.display="block";
+  menu.classList.add("animate");
+}
 </script>
 
-<!-- MENÚ -->
+<!-- MENU -->
 <div class="menu" id="menu">
-  <h2>MENÚ</h2>
   <div class="sections">
-    <div class="card" onclick="showInfo();">Información</div>
-    <div class="card" onclick="showVentas();">Ventas</div>
-    <div class="card" onclick="showRedes();">Redes</div>
+    <div class="card" onclick="show('info')">Información</div>
+    <div class="card" onclick="show('ventas')">Ventas</div>
+    <div class="card" onclick="show('redes')">Redes</div>
   </div>
 </div>
 
-<!-- INFORMACIÓN -->
+<!-- INFO -->
 <div class="content" id="info">
   <div class="box">
-    <h2>Información</h2>
     <p>
-      Hola, soy tonihaxball, streamer de YouTube y TikTok. Actualmente vendo brainrots, un juego digital de Roblox que tiene un gran mercado. Hago directos todos los días y mi meta son los 100k de suscriptores. Sé de tecnología, vendo cuentas de videojuegos, sé diseño básico, edito videos y fotos, y mucho más.
+      Hola, soy tonihaxball, streamer de YouTube y TikTok. Actualmente vendo brainrots,
+      un juego digital de Roblox con gran mercado. Hago directos todos los días y mi meta
+      son los 100k de suscriptores. Sé de tecnología, vendo cuentas de videojuegos,
+      sé diseño básico, edito videos y fotos, y mucho más.
     </p>
-    <div class="back" onclick="backMenu();">Volver al menú</div>
+    <div class="back" onclick="back()">Volver</div>
   </div>
 </div>
 
 <!-- VENTAS -->
 <div class="content" id="ventas">
   <div class="box">
-    <h2>Ventas</h2>
-    <p>Este link es de mi servidor de Discord oficial de ventas.</p>
     <a class="link-box" href="https://discord.gg/N2Nscgvu" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">Discord
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">Discord
     </a>
-    <div class="back" onclick="backMenu();">Volver al menú</div>
+    <div class="back" onclick="back()">Volver</div>
   </div>
 </div>
 
 <!-- REDES -->
 <div class="content" id="redes">
   <div class="box">
-    <h2>Redes</h2>
     <a class="link-box" href="https://www.tiktok.com/@ketupakcito_store?lang=es" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046123.png" alt="TikTok">TikTok
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046123.png">TikTok
     </a>
     <a class="link-box" href="https://www.youtube.com/@TONIHAXBALL" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">YouTube
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">YouTube
     </a>
-    <div class="back" onclick="backMenu();">Volver al menú</div>
+    <div class="back" onclick="back()">Volver</div>
   </div>
 </div>
+
+</body>
+</html>
 
